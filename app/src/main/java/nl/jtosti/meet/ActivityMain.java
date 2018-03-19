@@ -9,12 +9,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+
+import java.util.List;
+
 public class ActivityMain extends AppCompatActivity {
 
     final FragmentManager fragmentManager = getSupportFragmentManager();
     final Fragment fragmentScan = new FragmentScan();
     final Fragment fragmentProfile = new FragmentProfile();
     final Fragment fragmentConnected = new FragmentConnected();
+    Person user;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -27,6 +32,11 @@ public class ActivityMain extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.fragment, fragmentScan).commit();
                     return true;
                 case R.id.nav_connected:
+                    Bundle arguments = new Bundle();
+                    Gson gson = new Gson();
+                    arguments.putString("connected", gson.toJson(user));
+                    FragmentConnected fragmentConnected = new FragmentConnected();
+                    fragmentConnected.setArguments(arguments);
                     fragmentTransaction.replace(R.id.fragment, fragmentConnected).commit();
                     return true;
                 case R.id.nav_profile:
@@ -45,9 +55,9 @@ public class ActivityMain extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        Person person = new Person("Joost", "Lekkerkerker");
+        user = new Person("Joost", "Lekkerkerker");
         Facebook facebook = new Facebook();
-        person.addSocialMedia(facebook);
+        user.addSocialMedia(facebook);
     }
 
 }
