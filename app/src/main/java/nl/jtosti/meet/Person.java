@@ -2,8 +2,6 @@ package nl.jtosti.meet;
 
 import java.util.ArrayList;
 
-
-
 public class Person {
     private String firstName;
     private String lastName;
@@ -35,6 +33,10 @@ public class Person {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String constructName() {
+        return this.firstName + " " + this.lastName;
     }
 
     public ArrayList<SocialMedia> getSocialMedia() {
