@@ -2,6 +2,8 @@ package nl.jtosti.meet;
 
 import java.util.ArrayList;
 
+import nl.jtosti.meet.socialMedia.SocialMedia;
+
 public class Person {
     private String firstName;
     private String lastName;
